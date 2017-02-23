@@ -9,21 +9,42 @@ https://docs.djangoproject.com/en/1.10/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/1.10/ref/settings/
 """
-
+import json
 import os
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
-BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
+# STATIC_DIR = os.path.join(BASE_DIR, 'static')
+
+
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+ROOT_DIR = os.path.dirname(BASE_DIR)
+CONF_DIR = os.path.join(ROOT_DIR, '.conf')
+
+config = json.loads(open(os.path.join(CONF_DIR, 'settings_local.json')).read())
+# TEMPLATESDIR =os.path.join(BASE_DIR, '')
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/1.10/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = '@&4*!eeu8mt-cw&0)jwx7ydj94__#k6me*jlrq0kzn1guz60c('
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
+
+
+TEMPLATE_DIR = os.path.join(BASE_DIR, 'templates')
+
+
+STATIC_URL = '/static/'
+STATIC_DIR = os.path.join(BASE_DIR, 'static')
+STATICFILES_DIRS = (
+    STATIC_DIR,
+)
+
+
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 ALLOWED_HOSTS = []
 
@@ -37,6 +58,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+
+    'member',
 ]
 
 MIDDLEWARE = [
@@ -54,7 +77,9 @@ ROOT_URLCONF = 'facebook.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [
+            TEMPLATE_DIR
+        ],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -81,8 +106,13 @@ DATABASES = {
 }
 
 
+
+
 # Password validation
+
+
 # https://docs.djangoproject.com/en/1.10/ref/settings/#auth-password-validators
+AUTH_USER_MODEL = 'member.MyUser'
 
 AUTH_PASSWORD_VALIDATORS = [
     {
@@ -117,4 +147,3 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.10/howto/static-files/
 
-STATIC_URL = '/static/'
