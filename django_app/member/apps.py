@@ -1,5 +1,3 @@
-from django.apps import AppConfig
+from django.contrib import admin
 
-
-class MemberConfig(AppConfig):
-    name = 'member'
+# Register your models here.

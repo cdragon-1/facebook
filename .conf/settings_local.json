@@ -1,0 +1,10 @@
+{
+  "django": {
+    "secret_key" : "@&4*!eeu8mt-cw&0)jwx7ydj94__#k6me*jlrq0kzn1guz60c"
+  },
+
+  "facebook": {
+    "app_id": "1429271040438142",
+    "secret_code": "ead8c9d2145f0861c5da1763f8d3ea32"
+  }
+}
